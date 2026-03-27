@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Message for You</title>
+    <link rel="icon" href="https://img.icons8.com/emoji/48/heart-suit.png" type="image/x-icon">
+    <style>
+        /* --- General Reset & Fonts --- */
+        :root {
+            --bg-color: #fcebeb; /* Soft pink background */
+            --env-color: #f7a2b2; /* Darker pink for envelope */
+            --env-flap: #e88fa1; /* Shadow/inside of flap */
+            --text-color: #4a4a4a;
+            --accent: #d63384;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Georgia', serif;
+            overflow: hidden; /* Prevent scrolling during animation */
+        }
+
+        /* --- Envelope Container --- */
+        .wrapper {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        /* Slight hover effect for interactivity */
+        .wrapper:hover:not(.open) {
+            transform: translateY(-5px);
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: var(--env-color);
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        /* The Front Flap (Closed) */
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 100px solid var(--env-flap); /* Triangle pointing down */
+            transform-origin: top;
+            transition: transform 0.5s 0.2s ease, z-index 0.5s 0.2s; /* Delays the flip */
+            z-index: 20; /* Sits over the pocket */
+        }
+
+        /* The Pocket/Front visible triangle */
+        .pocket {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 100px solid var(--env-color); /* Sits at the bottom */
+            z-index: 15;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        /* The decorative heart seal */
+        .heart-seal {
+            position: absolute;
+            top: 75px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            color: #ffdde1;
+            z-index: 25;
+            transition: opacity 0.3s 0.1s ease;
+        }
+
+        /* --- The Actual Letter (Hidden Inside) --- */
+        .letter-content {
+            position: absolute;
+            background: #fff;
+            width: 90%;
+            height: 90%;
+            top: 5%;
+            left: 5%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            z-index: 5; /* Starts hidden behind envelope */
+            padding: 30px;
+            opacity: 0; /* Hidden initially */
+            transition: transform 0.8s 0.6s ease, opacity 0.5s 0.8s ease, box-shadow 0.3s ease;
+            transform: translateY(20px); /* Positioned low inside */
+        }
+
+        /* Text inside the hidden letter */
+        .letter-content h1 {
+            color: var(--accent);
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            opacity: 0; /* Hidden text */
+            transition: opacity 0.5s 1.2s ease;
+        }
+
+        .letter-content p {
+            line-height: 1.6;
+            font-size: 1.05rem;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            opacity: 0;
+            transition: opacity 0.5s 1.4s ease;
+        }
+
+        .letter-content strong {
+            color: var(--accent);
+        }
+
+        /* --- THE 'OPEN' ANIMATION STATE (Triggered by JS) --- */
+        .wrapper.open .flap {
+            transform: rotateX(180deg); /* Flip flap up */
+            z-index: 0; /* Move flap behind the letter */
+        }
+
+        .wrapper.open .heart-seal {
+            opacity: 0; /* Hide the seal */
+        }
+
+        .wrapper.open .letter-content {
+            opacity: 1; /* Show letter */
+            z-index: 30; /* Bring above envelope */
+            transform: translateY(-200px) scale(1.1); /* Slide way up and slight zoom */
+            cursor: default; /* Letter is no longer clickable */
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15); /* Stronger shadow when active */
+        }
+        
+        /* Reveal text after letter has slid up */
+        .wrapper.open .letter-content h1,
+        .wrapper.open .letter-content p {
+            opacity: 1;
+        }
+
+        /* Keep the letter centered and readable on small screens */
+        @media (max-width: 600px) {
+            .letter-content {
+                width: 95%;
+                height: 120%; /* Allows it to grow slightly */
+                left: 2.5%;
+            }
+            .wrapper.open .letter-content {
+                transform: translateY(-160px) scale(1.05);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper" id="envelopeWrapper">
+        
+        <div class="envelope">
+            <div class="flap"></div>
+            <div class="pocket"></div>
+            <div class="heart-seal">❤</div>
+        </div>
+
+        <div class="letter-content" id="theLetter">
+            <h1>My Dear [Name],</h1>
+            
+            <p>
+                Sometimes the simplest things are the hardest to say. 
+                I just wanted you to know that I appreciate you.
+            </p>
+
+            <p>
+                You make the good days better and the tough days 
+                a little easier. Thank you for being in my life.
+            </p>
+            
+            <p>
+                With love,<br>
+                <strong>[Your Name]</strong>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('envelopeWrapper').addEventListener('click', function() {
+            // We only trigger the open if it's not already open
+            if (!this.classList.contains('open')) {
+                this.classList.add('open');
+            }
+        });
+    </script>
+</body>
+</html>
