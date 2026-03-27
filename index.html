@@ -81,7 +81,7 @@
             position: absolute;
             background: #fff;
             width: 90%;
-            max-height: 400px;
+            max-height: 480px; /* Increased height to accommodate the GIF */
             top: 5%; left: 5%;
             border-radius: 10px;
             z-index: 5;
@@ -90,7 +90,7 @@
             transition: transform 0.8s 0.6s ease, opacity 0.5s 0.8s ease;
             transform: translateY(20px);
             text-align: left;
-            overflow-y: auto; /* Adds a scrollbar if the message is too long for the screen */
+            overflow-y: auto; 
         }
 
         .letter-content h1 {
@@ -110,6 +110,23 @@
             transition: opacity 0.5s 1.4s ease;
         }
 
+        /* GIF styling */
+        .closing-gif-container {
+            text-align: center; /* Centers the image */
+            margin-top: 25px;
+            margin-bottom: 20px;
+            opacity: 0; /* Hidden text */
+            transition: opacity 0.5s 1.6s ease;
+        }
+
+        .closing-gif-container img {
+            max-width: 150px; /* Adjust size as needed */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 2px solid #ffdde1; /* Subtle pink border */
+        }
+
         .wrapper.open .flap { transform: rotateX(180deg); z-index: 0; }
         .wrapper.open .heart-seal { opacity: 0; }
         .wrapper.open .letter-content {
@@ -119,11 +136,16 @@
             box-shadow: 0 15px 50px rgba(0,0,0,0.15);
         }
         
+        /* Transition timing for all letter content elements */
         .wrapper.open .letter-content h1,
-        .wrapper.open .letter-content p { opacity: 1; }
+        .wrapper.open .letter-content p,
+        .wrapper.open .closing-gif-container { 
+            opacity: 1; 
+        }
 
         @media (max-width: 600px) {
             .wrapper.open .letter-content { transform: translateY(-250px); width: 95%; left: 2.5%; }
+            .closing-gif-container img { max-width: 120px; } /* Slightly smaller GIF on mobile */
         }
     </style>
 </head>
@@ -152,8 +174,12 @@
             <p>So yeah, I’m really, really, really happy to celebrate this 10th monthsary with you. Sorry if there isn't much of a celebration, hehe, but just being with you—even if it's just online or while you're taking a bath while I'm making this—already makes me the happiest boyfriend right now!!</p>
             
             <p><strong>I LOVE YOU SO MUCH, MWAMWA LOVEYY BUNBUN KOOO!</strong></p>
+
+            <div class="closing-gif-container">
+                <img src="https://media.tenor.com/bKjM8Q38v6YAAAAi/tkthao219-bubududu.gif" alt="Happy Bears Kissing">
+            </div>
             
-            <p style="text-align: right; font-style: italic; margin-top: 20px;">From, Zos</p>
+            <p style="text-align: right; font-style: italic;">From, Zos</p>
         </div>
     </div>
 
