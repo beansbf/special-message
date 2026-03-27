@@ -79,7 +79,6 @@
             position: absolute;
             background: #fff;
             width: 90%;
-            /* Increased height to fit everything without a scrollbar */
             max-height: 550px; 
             top: 5%; left: 5%;
             border-radius: 10px;
@@ -89,11 +88,12 @@
             transition: transform 0.8s 0.6s ease, opacity 0.5s 0.8s ease;
             transform: translateY(20px);
             text-align: left;
+            overflow-y: auto;
         }
 
         .letter-content h1 {
             color: var(--accent);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 10px;
         }
 
@@ -110,7 +110,7 @@
         }
 
         .gif-container img {
-            width: 100px;
+            width: 120px;
             height: auto;
             border-radius: 5px;
         }
@@ -120,17 +120,16 @@
         .wrapper.open .letter-content {
             opacity: 1;
             z-index: 30;
-            /* Moves the letter up higher so the bottom is visible */
-            transform: translateY(-320px); 
+            /* Moves the letter higher to make sure the GIF is seen */
+            transform: translateY(-330px); 
             box-shadow: 0 15px 50px rgba(0,0,0,0.15);
         }
 
         @media (max-width: 600px) {
             .wrapper.open .letter-content { 
-                transform: translateY(-300px); 
+                transform: translateY(-310px); 
                 width: 95%; 
                 left: 2.5%; 
-                max-height: 500px;
             }
         }
     </style>
@@ -147,22 +146,22 @@
         <div class="letter-content">
             <h1>Happy 10th Monthsary, loveyy ko!!</h1>
             
-            <p>Just two months away from celebrating our first anniversary!! I’m so happy and excited to celebrate it with you!!</p>
+            <p>Just two months away from our first anniversary!! I’m so happy and excited to celebrate it with you!!</p>
             
-            <p>But first of all, I want to say thank you for being the best girlfriend. You really do so much for our relationship, and I’m so thankful that you’re always here for me.</p>
+            <p>I want to say thank you for being the best girlfriend. You really do so much for our relationship, and I’m so thankful that you’re always here for me.</p>
 
-            <p>Sometimes I feel guilty because I worry that I'm not doing enough right, but what makes me most happy is how optimistic you are.</p>
+            <p>Sometimes I worry that I'm not doing enough right, but what makes me most happy is how optimistic you are.</p>
 
-            <p>I’m really happy our relationship has lasted this long, and I’m even more excited to celebrate more monthsaries with you especially!!</p>
+            <p>I’m really happy our relationship has lasted this long, and I’m even more excited for more monthsaries with you!!</p>
 
-            <p>I really hope that any misunderstandings are just part of us growing together. I hope we can overcome all those hardships together.</p>
+            <p>I hope any misunderstandings are just part of us growing together. I hope we can overcome everything together.</p>
 
-            <p>So yeah, I’m really happy to celebrate this 10th monthsary with you. Just being with you makes me the happiest boyfriend right now!!</p>
+            <p>I’m really happy to celebrate this 10th monthsary with you. Just being with you makes me the happiest boyfriend right now!!</p>
             
             <p><strong>I LOVE YOU SO MUCH!</strong></p>
 
             <div class="gif-container">
-                <img src="https://media.tenor.com/On7y9E6R600AAAAi/peach-goma.gif" alt="Bears">
+                <img src="https://i.pinimg.com/originals/15/3c/59/153c59185cc57bf81b69c4a0e692eaae.gif" alt="Bears Kissing">
             </div>
             
             <p style="text-align: right; font-style: italic; font-size: 0.8rem;">From, Zos</p>
